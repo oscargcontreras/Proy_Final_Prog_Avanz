@@ -1,0 +1,37 @@
+DROP DATABASE IF EXISTS dbfinal;
+
+CREATE DATABASE dbfinal DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+
+use dbfinal;
+
+DROP TABLE IF EXISTS dependence;
+CREATE TABLE dependence (
+id INT NOT NULL AUTO_INCREMENT, 
+name VARCHAR(30) NOT NULL UNIQUE,
+acronym VARCHAR(4),
+type VARCHAR(14),
+active BOOLEAN,
+id_dependence int,
+primary key (id),
+foreign key(id_dependence) references dependence(id));
+
+DROP TABLE IF EXISTS QUALITY_PROCESSES;
+CREATE TABLE  QUALITY_PROCESSES(
+id INT NOT NULL AUTO_INCREMENT,
+num_resolution VARCHAR(4),
+date_num_resoltion date,
+validity INT,
+date_expiration date,
+dependenceid int,
+primary key (id),
+foreign key(dependenceid) references dependence(id));
+
+DROP TABLE IF EXISTS SELF_EVALUATION;
+CREATE TABLE SELF_EVALUATION(
+id INT NOT NULL AUTO_INCREMENT,
+date_auto date,
+date_prox_auto date,
+dependenceid int,
+primary key (id),
+foreign key(dependenceid) references dependence(id));
+
